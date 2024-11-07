@@ -2,6 +2,18 @@
 #include <vector>
 #include <iostream>
 
+// Función para imprimir un vector de tipo genérico
+template <typename T> void imprimirVector(std::vector<T>& vec){
+	std::cout << "[";
+	for (int i = 0; i < vec.size(); i++){
+		std::cout << vec[i];
+		if(i != vec.size() - 1)		// Si la i NO ha llegado al último elemento del array, imprimimos los elementos separados por comas
+			std::cout << ", ";
+	}
+	std::cout << "]";
+	std::cout << std::endl;
+}
+
 int main(){
 
 	// Pruebas busquedaBinaria 	
@@ -32,6 +44,22 @@ int main(){
 		std::cout << "No se ha encontrado el elemento!" << std::endl;
 	else
 		std::cout << "La posición en el array del elemento encontrado es: " << std::endl << posicion4 << std::endl << posicion5 << std::endl << posicion6 << std::endl;
-	
+
+	// Pruebas QuickSort
+
+	std::vector<int> g = {11, 16, 2, 8, 1, 9, 4, 7};
+	std::vector<double> h = {7.0, 1.0, 12.0, 5.0, 2.0, 9.0};
+	std::vector<char> i = {'d', 'a', 'n', 'l', 'z'};
+
+	quickSort(g, 0, g.size()-1);	// QuickSort() me pone en g el vector ordenado, luego desoués con imprimir g ya me sirve
+	imprimirVector(g);
+
+
+	quickSort(h, 0, h.size()-1);
+	imprimirVector(h);
+
+	quickSort(i, 0, i.size()-1);
+	imprimirVector(i);
+
 	return 0;
 }

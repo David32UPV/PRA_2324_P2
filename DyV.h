@@ -2,6 +2,7 @@
 // se encuentra dicho valor
 #include <vector>
 #include <iostream>
+#include <utility> // Para std::swap
 
 template <typename T> int busquedaBinaria(std::vector<T>& A, int ini, int fin, T x){
 	// Caso base -> recorremos el array y NO encontramos el vector
@@ -39,5 +40,40 @@ template <typename T> int busquedaBinaria_INV(std::vector<T>& A, int ini, int fi
 		return busquedaBinaria_INV(A, m+1, fin, x);
 		
 }
+
+/********Función QuickSort()**********/
+// Definición cabecera función particion()
+template <typename T> int particion(std::vector<T>& A, int ini, int fin);
+
+// Implementación funcion QuickSort() con pivote como A[fin]
+template <typename T> void quickSort(std::vector<T>& A, int ini, int fin){
+	if (ini < fin){
+		int pivote = particion(A, ini, fin);
+		quickSort(A, ini, pivote-1);
+		quickSort(A, pivote+1, fin);
+	}
+}
+
+
+template <typename T> int particion(std::vector<T>& A, int ini, int fin){
+	int i = ini;
+	for(int j = ini; j <= fin-1; j++){
+		if(A[j] <= A[fin]){
+			// Intercambiamos A[i] con A[j]
+			std::swap(A[i], A[j]);
+			// Avanzamos i
+			i++;
+		}
+	}
+	// Tras llegar al último elemento del array, intercambiamos el pivote(A[fin]) con nuestro A[i]
+	std::swap(A[i], A[fin]);
+
+	// Como en A[i] tengo mi pivote, devuelvo la posición i 
+	return i;
+}
+
+
+// Implementación funcion QuickSort() con pivote como A[ini]
+
 
 
